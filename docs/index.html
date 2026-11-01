@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Security Deposit and FDR Portal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600">
+<style>
+:root{--bg:#f5f7fa;--ink:#2d3748;--mute:#7a8699;--line:#e8ecf2;--mint:#e9f5f1;--teal:#2a8a76;--ok:#1f7a4f;--okbg:#e4f4ec;--warn:#a46a00;--warnbg:#fcf1db;--bad:#b3362c;--badbg:#fbe7e4;--info:#3b82c8;--infobg:#e6eff9;--grey:#6b7686;--greybg:#eceff3;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 "Noto Sans",system-ui,"Segoe UI",sans-serif}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.shell{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+aside{background:#fff;border-right:1px solid var(--line);padding:16px 0;display:flex;flex-direction:column;color:#506078}
+.brand{display:flex;gap:10px;align-items:center;padding:0 16px 16px;border-bottom:1px solid var(--line);color:var(--ink)}
+.seal{width:36px;height:36px;border-radius:8px;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:600;font-size:13px}
+.brand b{display:block;font-size:14px}.brand small{font-size:11.5px;color:var(--mute)}
+aside nav{padding:12px 8px;display:grid;gap:2px}
+aside a{display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border-radius:6px;color:inherit;text-decoration:none;font-size:13.5px}
+aside a.on{background:var(--mint);color:var(--teal);font-weight:600}
+aside a i{font-style:normal;background:var(--badbg);color:var(--bad);border-radius:9px;font-size:11px;padding:0 7px;font-weight:600}
+.side-foot{margin-top:auto;padding:12px 16px;font-size:12px;color:var(--mute);border-top:1px solid var(--line)}
+.main{min-width:0}
+.top{background:#fff;border-bottom:1px solid var(--line);padding:10px 22px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.top h1{font-size:18px;margin:0;font-weight:600}.top small{display:block;color:var(--mute);font-size:12px;font-weight:400}
+.search{margin-left:auto;border:1px solid var(--line);border-radius:6px;padding:7px 10px;min-width:240px;background:var(--bg)}
+.search input{border:0;background:transparent;outline:0;font:inherit;color:inherit;width:100%}
+select,input,textarea{font:inherit;color:inherit}
+.role{border:1px solid var(--line);border-radius:6px;padding:7px 8px;background:#fff}
+.pad{padding:18px 22px 28px;display:grid;gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.kpi{padding:12px 14px;border-top:3px solid var(--c)}.kpi span{color:var(--mute);font-size:12.5px}.kpi b{display:block;font-size:24px;font-weight:600;line-height:1.25}.kpi em{font-style:normal;font-size:12px;color:var(--mute)}
+.row{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(310px,1fr);gap:16px}
+.ch{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.ch h2{font-size:14.5px;margin:0;font-weight:600}.ch small{color:var(--mute)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}.tabs button{border:1px solid var(--line);background:#fff;color:var(--mute);padding:4px 10px;border-radius:5px;cursor:pointer;font:inherit;font-size:12.5px}.tabs button.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:640px}
+th{text-align:left;font-weight:600;font-size:12px;color:var(--mute);padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--line)}.r{text-align:right}
+td{padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}td small{color:var(--mute);display:block;font-size:12px}
+tbody tr.rw{cursor:pointer}tbody tr.rw:hover{background:var(--bg)}tbody tr.sel{background:var(--mint);box-shadow:inset 3px 0 var(--teal)}
+.pill{display:inline-block;padding:2px 9px;border-radius:4px;font-size:12px;font-weight:500}
+.p-ok{background:var(--okbg);color:var(--ok)}.p-warn{background:var(--warnbg);color:var(--warn)}.p-bad{background:var(--badbg);color:var(--bad)}.p-info{background:var(--infobg);color:var(--info)}.p-grey{background:var(--greybg);color:var(--grey)}
+.pg{padding:9px 16px;color:var(--mute);font-size:12.5px}
+.det{padding:14px 16px}.det h3{margin:0;font-size:15px}.det .id{color:var(--mute);font-size:12.5px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin:12px 0;padding:10px 12px;background:var(--bg);border-radius:6px}.facts span{display:block;color:var(--mute);font-size:11.5px}.facts b{font-weight:600;font-size:13.5px}
+.ck{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}.ck:last-of-type{border:0}
+.ck .t{flex:1}.ck .t b{display:block;font-weight:500}.ck .t small{color:var(--mute);font-size:12px}
+.ic{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;flex:none}
+.life{margin:12px 0 4px}.life i{display:block;height:8px;border-radius:4px;background:var(--line);overflow:hidden}.life i b{display:block;height:100%;background:var(--teal)}
+.life div{display:flex;justify-content:space-between;font-size:11.5px;color:var(--mute);margin-top:4px}
+.btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+button.b{padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-weight:500;cursor:pointer}
+button.b.pri{background:var(--teal);border-color:var(--teal);color:#fff}button.b.bd{color:var(--bad);border-color:var(--bad)}button.b.sm{padding:3px 9px;font-size:12.5px}button.b:disabled{opacity:.5;cursor:wait}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 16px}.f label{display:grid;gap:4px;font-weight:500;font-size:13px}.f .full{grid-column:1/-1}
+.f input,.f select{padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;min-width:0}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cb{padding:12px 16px}.cb svg{width:100%;height:auto;display:block}
+.legend{display:grid;gap:5px;font-size:12.5px;margin-top:6px}.legend div{display:flex;align-items:center;gap:7px}.legend i{width:9px;height:9px;border-radius:2px}.legend b{margin-left:auto}
+.feed{list-style:none;margin:0;padding:4px 16px 8px}.feed li{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;cursor:pointer}.feed li:last-child{border:0}
+.dot{width:8px;height:8px;border-radius:50%;margin-top:7px;flex:none}
+.mo{padding:12px 16px;border-bottom:1px solid var(--line)}.mo:last-child{border:0}.mo h3{margin:0 0 6px;font-size:14px}.mo div{display:flex;justify-content:space-between;gap:10px;padding:3px 0;font-size:13px}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#2d3748;color:#fff;padding:10px 16px;border-radius:6px;z-index:9}
+.empty{padding:22px 16px;color:var(--mute)}
+@media (max-width:1180px){.kpis{grid-template-columns:repeat(3,1fr)}.row3{grid-template-columns:1fr 1fr}}
+@media (max-width:960px){.row{grid-template-columns:1fr}}
+@media (max-width:760px){.shell{grid-template-columns:1fr}aside{display:block;border-right:0;border-bottom:1px solid var(--line);padding:8px}aside .brand,.side-foot{display:none}aside nav{display:flex;overflow-x:auto;padding:0}aside a{white-space:nowrap;gap:6px}.top{padding:10px 14px}.search{margin:0;min-width:0;flex:1 1 100%}.pad{padding:14px}.kpis,.row3,.f{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside><div class="brand"><div class="seal">FD</div><div><b>Deposit Portal</b><small>Security deposits and FDRs</small></div></div><nav id="nav" aria-label="Main"></nav><div class="side-foot">Demo with sample data.<br>Changes are saved in this browser.<br><a href="#" id="rs" style="color:var(--teal)">Reset demo data</a></div></aside>
+<div class="main">
+<header class="top"><div><h1 id="h1"></h1><small id="date" style="color:var(--mute);font-size:12px"></small></div>
+<label class="search"><input id="q" placeholder="Search contractor, FDR number or work" aria-label="Search"></label>
+<label>Role <select id="role" class="role" aria-label="Role"><option value="off">Accounts officer</option><option value="con">Contractor</option><option value="bank">Bank</option></select></label></header>
+<main class="pad" id="app"></main>
+</div></div>
+<div id="toast" class="toast" role="status" hidden></div>
+<script>
+const $=s=>document.querySelector(s),DAY=864e5,NOW=new Date();NOW.setHours(0,0,0,0);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const iso=n=>new Date(NOW.getTime()+n*DAY).toISOString().slice(0,10),dn=d=>Math.round((new Date(d)-NOW)/DAY);
+const inr=n=>"₹ "+Number(n).toLocaleString("en-IN"),fd=d=>new Date(d).toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+const lak=n=>(n/1e5).toFixed(1);
+const KEY="fdr-demo-v1";let S,role="off",page="dashboard",sel=null,flt="All",adding=false;
+const SEED=[["Malwa Infra Pvt Ltd","NH-52 bypass widening, Indore","PWD","State Bank of India",1850000,-351,13,105,"v","ok","m"],["Narmada Constructions","Water supply pipeline, Dewas","PHED","Bank of Baroda",725000,-334,45,200,"v","ok","m"],["Vindhya Electricals","33 kV substation, Bhopal","MPEB","Punjab National Bank",1200000,-376,-12,60,"v","ok","l"],["Shipra Builders","Government college building, Ujjain","PWD","HDFC Bank",2460000,-236,130,-4,"v","ok","m","r"],["Chambal Roadways","Rural road package 4, Gwalior","PMGSY","Canara Bank",540000,-214,150,200,"p","bad","n"],["Betwa Engineers","Bridge repair, Sagar","PWD","Union Bank of India",980000,-341,24,90,"v","ok","m"],["Tapti Projects","Drainage works, Nashik","NMC","ICICI Bank",1530000,-293,72,150,"v","ok","m"],["Sutlej Infra","Canal lining, Ludhiana","Irrigation","State Bank of India",3100000,-440,-75,-120,"v","ok","n","x"],["Godavari Contractors","Sewerage plant, Nashik","NMC","Axis Bank",1175000,-269,96,180,"v","ok","m"],["Kshipra Developers","Market complex, Dewas","Urban Dev.","Bank of India",620000,-358,7,55,"v","ok","n"],["Sagar Roadlines","Ring road phase 2, Jabalpur","PWD","State Bank of India",2200000,-90,275,330,"p","pending","n"],["Mahi Waterworks","Overhead tank, Ratlam","PHED","Punjab National Bank",890000,-150,215,120,"v","ok","m"]];
+function seed(){return{n:SEED.length,log:[{t:Date.now(),id:"—",who:"System",m:"Demo data loaded"}],d:SEED.map((a,i)=>({id:"FDR-2026-"+String(841-i*5),c:a[0],w:a[1],dp:a[2],b:a[3],amt:a[4],from:iso(a[5]),to:iso(a[6]),dl:iso(a[7]),bk:a[8],ocr:a[9],lien:a[10],rq:a[11]==="r",rel:a[11]==="x"}))}}
+function load(){try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!S||!S.d)S=seed()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+load();
+const st=a=>a.rel?"Released":a.rq?"Release requested":(a.bk!=="v"||a.ocr!=="ok")?"Verification pending":dn(a.to)<0?"Expired":dn(a.to)<=30?"Maturing soon":"Active";
+const SC={Active:"ok","Maturing soon":"warn",Expired:"bad","Release requested":"info","Verification pending":"warn",Released:"grey"};
+const CL={Active:"#2a8a76","Maturing soon":"#e0a526","Verification pending":"#e58b3a","Release requested":"#3b82c8",Expired:"#c8483c",Released:"#a3adbb"};
+const when=a=>a.rel?"Closed":dn(a.to)<0?`${-dn(a.to)} days ago`:dn(a.to)===0?"today":`in ${dn(a.to)} days`;
+const WHO={off:"Accounts officer",con:"Contractor",bank:"Bank"};
+const log=(a,m)=>{S.log.unshift({t:Date.now(),id:a?a.id:"—",who:WHO[role],m});save()};
+function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2800)}
+const by=id=>S.d.find(x=>x.id===id);
+// actions: [label, class, roles, available(a), run(a)]
+const ACT={
+verify:["Verify with bank","pri",["off","bank"],a=>a.bk!=="v"&&!a.rel,(a,b)=>{b.disabled=true;toast("Contacting "+a.b+"…");setTimeout(()=>{if(Math.random()<.85){a.bk="v";log(a,"Bank confirmed the FDR ("+a.b+")");toast("Bank confirmed "+a.id)}else{a.bk="f";log(a,"Bank could not match FDR number");toast("Bank could not match this FDR")}render()},900)}],
+ocr:["Scan receipt (OCR)","",["off","con"],a=>a.ocr!=="ok"&&!a.rel,(a,b)=>{b.disabled=true;toast("Reading receipt…");setTimeout(()=>{if(Math.random()<.85){a.ocr="ok";log(a,"Receipt scan matched the entry");toast("Receipt matches the entry")}else{a.ocr="bad";log(a,"Receipt scan unreadable");toast("Receipt unreadable. Upload a clearer scan and try again")}render()},800)}],
+lien:["Mark lien","",["off","bank"],a=>a.lien!=="m"&&!a.rel,a=>{a.lien="m";log(a,"Lien marked in favour of the department");toast("Lien marked")}],
+renew:["Renew FDR (+12 months)","",["off","con"],a=>!a.rel&&!a.rq&&dn(a.to)<=60,a=>{a.to=iso(dn(a.to)+365);a.lien="m";log(a,"FDR renewed for 12 months, lien re-marked");toast("Renewed until "+fd(a.to))}],
+notice:["Send notice","",["off"],a=>!a.rel&&(dn(a.to)<=30||a.bk==="f"),a=>{log(a,dn(a.to)<0?"Recovery notice sent to contractor":"Renewal notice sent to contractor");toast("Notice sent to "+a.c)}],
+reqrel:["Request release","pri",["con"],a=>!a.rel&&!a.rq&&a.bk==="v",a=>{if(dn(a.dl)>0)return toast("Defect liability ends on "+fd(a.dl)+". Release cannot be requested yet.");a.rq=true;log(a,"Release requested by contractor");toast("Release requested")}],
+approve:["Approve release","pri",["off"],a=>a.rq,a=>{a.rel=true;a.rq=false;a.lien="n";log(a,"Release approved. Bank asked to remove lien");toast("Release approved")}],
+hold:["Hold release","bd",["off"],a=>a.rq,a=>{a.rq=false;log(a,"Release put on hold");toast("Release put on hold")}]};
+const acts=(a,ks,cls)=>ks.filter(k=>ACT[k][2].includes(role)&&ACT[k][3](a)).map(k=>`<button class="b ${cls||ACT[k][1]}" data-act="${k}" data-id="${a.id}">${ACT[k][0]}</button>`).join("")||(cls?'<span style="color:var(--mute)">—</span>':'<span style="color:var(--mute);font-size:13px">No actions for your role right now.</span>');
+document.addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(b){const a=by(b.dataset.id);ACT[b.dataset.act][4](a,b);save();if(!b.disabled)render();return}
+ const r=e.target.closest("[data-sel]");if(r){sel=r.dataset.sel;adding=false;if(r.dataset.go)go(r.dataset.go);else render()}});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"){const r=e.target.closest("[data-sel]");if(r)r.click()}});
+// views
+const IC={ok:["✓","ok"],warn:["!","warn"],bad:["✕","bad"]};
+function checks(a){const r=[[a.bk==="v"?"ok":a.bk==="f"?"bad":"warn","Bank confirmation",a.bk==="v"?"Confirmed by "+a.b:a.bk==="f"?"Bank could not match the FDR":"Not yet sent to bank"],[a.lien==="m"?"ok":a.lien==="l"?"bad":"warn","Lien status",a.lien==="m"?"Lien marked in favour of the department":a.lien==="l"?"Lien lapsed after maturity":"No lien recorded"],[a.ocr==="ok"?"ok":a.ocr==="bad"?"bad":"warn","Receipt scan (OCR)",a.ocr==="ok"?"Receipt text matches the entry":a.ocr==="bad"?"Receipt unreadable, upload again":"Scan pending"],[dn(a.dl)<=0?"ok":"warn","Defect liability",dn(a.dl)<=0?"Completed. Eligible for release":"Ends "+fd(a.dl)+", FDR must stay valid until then"]];
+ return r.map(c=>`<div class="ck"><div class="ic" style="background:var(--${c[0]==="ok"?"okbg":c[0]==="warn"?"warnbg":"badbg"});color:var(--${c[0]})">${IC[c[0]][0]}</div><div class="t"><b>${c[1]}</b><small>${c[2]}</small></div></div>`).join("")}
+function detail(){if(adding)return form();const a=by(sel)||S.d[0];if(!a)return'<div class="empty">No FDRs yet.</div>';sel=a.id;const s=st(a),tot=(new Date(a.to)-new Date(a.from))/DAY,pc=a.rel?100:Math.max(0,Math.min(100,(NOW-new Date(a.from))/DAY/tot*100));
+ return`<div class="det"><div style="display:flex;justify-content:space-between;gap:8px"><div><h3>${esc(a.c)}</h3><div class="id">${a.id} · ${esc(a.dp)}</div></div><span class="pill p-${SC[s]}">${s}</span></div>
+ <div class="facts"><div><span>Amount</span><b>${inr(a.amt)}</b></div><div><span>Bank</span><b>${esc(a.b)}</b></div><div><span>Issued</span><b>${fd(a.from)}</b></div><div><span>Matures</span><b>${fd(a.to)}</b></div></div>${checks(a)}
+ <div class="life"><i><b style="width:${pc.toFixed(0)}%"></b></i><div><span>${fd(a.from)}</span><span>${when(a)}</span><span>${fd(a.to)}</span></div></div>
+ <div class="btns">${acts(a,Object.keys(ACT))}</div></div>`}
+function form(){return`<div class="ch"><h2>Add new FDR</h2><button class="b sm" id="cx">Cancel</button></div><div class="f" id="fm">
+<label class="full">Contractor<input id="f_c"></label><label class="full">Work or contract<input id="f_w"></label>
+<label>Department<select id="f_d"><option>PWD</option><option>PHED</option><option>MPEB</option><option>NMC</option><option>Irrigation</option></select></label>
+<label>Bank<select id="f_b">${["State Bank of India","Bank of Baroda","Punjab National Bank","HDFC Bank","Canara Bank","ICICI Bank","Axis Bank"].map(x=>`<option>${x}</option>`).join("")}</select></label>
+<label>Amount (₹)<input id="f_a" type="number" min="1"></label><label>FDR issue date<input id="f_f" type="date" value="${iso(0)}"></label>
+<label>Maturity date<input id="f_t" type="date" value="${iso(365)}"></label><label>Defect liability ends<input id="f_l" type="date" value="${iso(300)}"></label>
+<div class="full"><button class="b pri" id="sv">Submit FDR</button></div></div>`}
+function split(list){const q=$("#q").value.toLowerCase();const l=list.filter(a=>(flt==="All"||st(a)===flt)&&(a.c+a.id+a.w).toLowerCase().includes(q));
+ return`<section class="row"><div class="card"><div class="ch"><h2>Security deposits and FDRs</h2><div class="tabs" id="tabs">${["All","Maturing soon","Expired","Release requested","Verification pending"].map(t=>`<button class="${t===flt?"on":""}">${t}</button>`).join("")}</div>${role==="con"||role==="off"?'<button class="b pri sm" id="ad">Add FDR</button>':""}</div>
+ <div class="tw"><table><thead><tr><th>Contractor and work</th><th>FDR number</th><th>Bank</th><th class="r">Amount</th><th>Matures</th><th>Status</th></tr></thead><tbody>${l.map(a=>`<tr tabindex="0" class="rw ${a.id===sel?"sel":""}" data-sel="${a.id}"><td><b style="font-weight:500">${esc(a.c)}</b><small>${esc(a.w)}</small></td><td>${a.id}</td><td>${esc(a.b)}</td><td class="r">${inr(a.amt)}</td><td>${fd(a.to)}<small>${when(a)}</small></td><td><span class="pill p-${SC[st(a)]}">${st(a)}</span></td></tr>`).join("")||'<tr><td colspan="6" class="empty">No FDRs match. Clear the search or pick another filter.</td></tr>'}</tbody></table></div>
+ <div class="pg">Showing ${l.length} of ${S.d.length} FDRs</div></div><div class="card" id="dt">${detail()}</div></section>`}
+function alerts(){const o=[];S.d.forEach(a=>{const s=st(a);if(s==="Expired")o.push(["#c8483c",`${a.id} expired ${-dn(a.to)} days ago. ${a.c}`,a.id]);else if(s==="Maturing soon")o.push(["#e0a526",`${a.id} matures ${when(a)}. ${a.c}`,a.id]);else if(s==="Release requested")o.push(["#3b82c8",`Release requested for ${a.id}`,a.id]);else if(s==="Verification pending")o.push(["#e58b3a",`${a.id} needs verification`,a.id]);if(a.lien==="n"&&!a.rel&&a.bk==="v")o.push(["#e58b3a",`${a.id} has no lien recorded`,a.id])});return o}
+function dashboard(){const d=S.d,c=s=>d.filter(a=>st(a)===s),sum=l=>l.reduce((t,a)=>t+a.amt,0),held=d.filter(a=>!a.rel);
+ const K=[["Total deposits held","₹ "+lak(sum(held))+" lakh","var(--teal)",held.length+" active records"],["Active FDRs",c("Active").length,"var(--info)","Matures after 30 days"],["Maturing in 30 days",c("Maturing soon").length,"#e0a526","₹ "+lak(sum(c("Maturing soon")))+" lakh to renew"],["Expired, not renewed",c("Expired").length,"#c8483c","Needs recovery notice"],["Release requests",c("Release requested").length,"#e58b3a","Awaiting officer"],["Verified with banks",d.length?Math.round(d.filter(a=>a.bk==="v").length/d.length*100)+"%":"0%","var(--ok)",d.filter(a=>a.bk!=="v").length+" pending"]];
+ const Dn=Object.keys(CL).map(s=>[s,c(s).length]);let o=0,R=52,C=2*Math.PI*R,p="";Dn.forEach(x=>{const len=x[1]/Math.max(d.length,1)*C;p+=`<circle cx="70" cy="70" r="${R}" fill="none" stroke="${CL[x[0]]}" stroke-width="18" stroke-dasharray="${Math.max(len-1.5,0)} ${C}" stroke-dashoffset="${-o}" transform="rotate(-90 70 70)"/>`;o+=len});
+ const mo=[];for(let i=0;i<6;i++){const m=new Date(NOW.getFullYear(),NOW.getMonth()+i,1);mo.push([m.toLocaleDateString("en-IN",{month:"short"}),sum(held.filter(a=>{const t=new Date(a.to);return t.getFullYear()===m.getFullYear()&&t.getMonth()===m.getMonth()}))/1e5])}
+ const mx=Math.max(...mo.map(x=>x[1]),1),bk={};held.forEach(a=>bk[a.b]=(bk[a.b]||0)+a.amt);const bb=Object.entries(bk).sort((a,b)=>b[1]-a[1]).slice(0,6),bm=bb.length?bb[0][1]:1;
+ const al=alerts().slice(0,6);
+ return`<section class="kpis">${K.map(k=>`<div class="card kpi" style="--c:${k[2]}"><span>${k[0]}</span><b>${k[1]}</b><em>${k[3]}</em></div>`).join("")}</section>${split(d)}
+ <section class="row3"><div class="card"><div class="ch"><h2>Deposits by status</h2></div><div class="cb"><svg viewBox="0 0 140 140" style="max-width:140px;margin:auto" role="img" aria-label="Status chart">${p}<text x="70" y="68" text-anchor="middle" font-size="21" font-weight="600" fill="#2d3748">${d.length}</text><text x="70" y="84" text-anchor="middle" font-size="9" fill="#7a8699">FDRs</text></svg><div class="legend">${Dn.map(x=>`<div><i style="background:${CL[x[0]]}"></i>${x[0]}<b>${x[1]}</b></div>`).join("")}</div></div></div>
+ <div class="card"><div class="ch"><h2>Upcoming maturities</h2><small>₹ lakh</small></div><div class="cb"><svg viewBox="0 0 260 140" role="img" aria-label="Maturities by month">${mo.map((x,i)=>{const h=x[1]/mx*90,bx=14+i*41;return`<rect x="${bx}" y="${105-h}" width="28" height="${h}" rx="2" fill="${i===0?"#e0a526":"#2a8a76"}"/><text x="${bx+14}" y="${100-h}" text-anchor="middle" font-size="9" fill="#2d3748">${x[1].toFixed(1)}</text><text x="${bx+14}" y="120" text-anchor="middle" font-size="9" fill="#7a8699">${x[0]}</text>`}).join("")}</svg><div style="display:grid;gap:8px;font-size:12.5px;margin-top:10px"><b>Held with each bank (₹ lakh)</b>${bb.map(x=>`<div><div style="display:flex;justify-content:space-between"><span>${esc(x[0])}</span><b>${lak(x[1])}</b></div><span style="display:block;background:var(--line);height:6px;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:${x[1]/bm*100}%;background:var(--teal)"></i></span></div>`).join("")}</div></div></div>
+ <div class="card"><div class="ch"><h2>Alerts</h2><small>${alerts().length} open</small></div><ul class="feed">${al.map(x=>`<li tabindex="0" data-sel="${x[2]}"><span class="dot" style="background:${x[0]}"></span><div>${esc(x[1])}</div></li>`).join("")||'<li class="empty">No open alerts.</li>'}</ul></div></section>`}
+const list=(title,sub,cols,rows)=>`<div class="card"><div class="ch"><h2>${title}</h2><small>${sub}</small></div><div class="tw"><table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${rows.join("")||`<tr><td colspan="${cols.length}" class="empty">Nothing here right now.</td></tr>`}</tbody></table></div></div>`;
+const name=a=>`<td><b style="font-weight:500">${esc(a.c)}</b><small>${a.id}</small></td>`;
+const PAGES={dashboard,
+deposits:()=>split(S.d),
+bank:()=>list("Bank verification","FDRs waiting for bank confirmation",["Contractor","Bank","Amount","Bank status","Receipt scan","Actions"],S.d.filter(a=>!a.rel).sort((a,b)=>(a.bk==="v")-(b.bk==="v")).map(a=>`<tr>${name(a)}<td>${esc(a.b)}</td><td>${inr(a.amt)}</td><td><span class="pill p-${a.bk==="v"?"ok":a.bk==="f"?"bad":"warn"}">${a.bk==="v"?"Confirmed":a.bk==="f"?"Not matched":"Pending"}</span></td><td><span class="pill p-${a.ocr==="ok"?"ok":a.ocr==="bad"?"bad":"warn"}">${a.ocr==="ok"?"Matched":a.ocr==="bad"?"Unreadable":"Pending"}</span></td><td>${acts(a,["verify","ocr"],"")}</td></tr>`)),
+lien:()=>list("Lien register","Lien in favour of the department",["Contractor","Bank","Amount","Lien","Actions"],S.d.filter(a=>!a.rel).map(a=>`<tr>${name(a)}<td>${esc(a.b)}</td><td>${inr(a.amt)}</td><td><span class="pill p-${a.lien==="m"?"ok":a.lien==="l"?"bad":"warn"}">${a.lien==="m"?"Marked":a.lien==="l"?"Lapsed":"Not recorded"}</span></td><td>${acts(a,["lien"],"")}</td></tr>`)),
+maturity:()=>{const g={};S.d.filter(a=>!a.rel).sort((a,b)=>a.to<b.to?-1:1).forEach(a=>{const k=new Date(a.to).toLocaleDateString("en-IN",{month:"long",year:"numeric"});(g[k]=g[k]||[]).push(a)});return`<div class="card"><div class="ch"><h2>Maturity calendar</h2><small>Reminders go out at 30, 15 and 7 days</small></div>${Object.entries(g).map(([k,l])=>`<div class="mo"><h3>${k}</h3>${l.map(a=>`<div data-sel="${a.id}" data-go="deposits" class="rw" tabindex="0" style="cursor:pointer"><span>${fd(a.to)} · ${esc(a.c)} <small style="color:var(--mute)">${a.id}</small></span><span><b>${inr(a.amt)}</b> <span class="pill p-${SC[st(a)]}">${st(a)}</span> ${acts(a,["renew","notice"],"")}</span></div>`).join("")}</div>`).join("")}</div>`},
+release:()=>list("Release requests","Defect liability completed",["Contractor","Amount","Defect liability ended","Status","Actions"],S.d.filter(a=>a.rq||a.rel).map(a=>`<tr>${name(a)}<td>${inr(a.amt)}</td><td>${fd(a.dl)}</td><td><span class="pill p-${SC[st(a)]}">${st(a)}</span></td><td>${acts(a,["approve","hold"],"")}</td></tr>`))+list("Eligible for a release request","Contractors can request these",["Contractor","Amount","Defect liability ended","Actions"],S.d.filter(a=>!a.rq&&!a.rel&&dn(a.dl)<=0&&a.bk==="v").map(a=>`<tr>${name(a)}<td>${inr(a.amt)}</td><td>${fd(a.dl)}</td><td>${acts(a,["reqrel"],"")}</td></tr>`)),
+audit:()=>list("Audit trail","Every action, newest first",["When","FDR","Who","Action"],S.log.slice(0,60).map(l=>`<tr><td>${new Date(l.t).toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"})}</td><td>${l.id}</td><td>${l.who}</td><td style="white-space:normal">${esc(l.m)}</td></tr>`)),
+reports:()=>{const d=S.d,bk={};d.forEach(a=>{const o=bk[a.b]=bk[a.b]||{n:0,s:0};o.n++;o.s+=a.amt});return list("Report: deposits by bank","<button class='b pri sm' id='csv'>Download CSV</button>",["Bank","FDRs","Total amount"],Object.entries(bk).map(([k,v])=>`<tr><td>${esc(k)}</td><td>${v.n}</td><td>${inr(v.s)}</td></tr>`))+list("Report: deposits by status","",["Status","FDRs","Total amount"],Object.keys(CL).map(s=>{const l=d.filter(a=>st(a)===s);return`<tr><td><span class="pill p-${SC[s]}">${s}</span></td><td>${l.length}</td><td>${inr(l.reduce((t,a)=>t+a.amt,0))}</td></tr>`}))},
+users:()=>list("Users and roles","Switch role from the top bar to try each view",["Role","What they can do"],[["Accounts officer","View everything, verify, mark lien, send notices, renew, approve or hold release"],["Contractor","Add FDRs, scan receipts, renew, request release"],["Bank","Verify FDRs and mark lien"]].map(r=>`<tr><td><b>${r[0]}</b></td><td style="white-space:normal">${r[1]}</td></tr>`))};
+const NAV=[["dashboard","Dashboard"],["deposits","Deposits and FDRs"],["bank","Bank verification"],["lien","Lien register"],["maturity","Maturity calendar"],["release","Release requests"],["audit","Audit trail"],["reports","Reports"],["users","Users and roles"]];
+function go(p){location.hash=p;page=p;render()}
+function render(){page=(location.hash||"#dashboard").slice(1);if(!PAGES[page])page="dashboard";const n=S.d.filter(a=>st(a)==="Release requested").length,v=S.d.filter(a=>a.bk!=="v"&&!a.rel).length;
+ $("#nav").innerHTML=NAV.map(([k,l])=>`<a href="#${k}" class="${k===page?"on":""}">${l}${k==="release"&&n?`<i>${n}</i>`:k==="bank"&&v?`<i>${v}</i>`:""}</a>`).join("");
+ $("#h1").textContent=NAV.find(x=>x[0]===page)[1];$("#date").textContent=NOW.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+ $("#q").style.display=["dashboard","deposits"].includes(page)?"":"none";$("#app").innerHTML=PAGES[page]();
+ const t=$("#tabs");if(t)t.onclick=e=>{const b=e.target.closest("button");if(b){flt=b.textContent;render()}};
+ const ad=$("#ad");if(ad)ad.onclick=()=>{adding=true;render()};const cx=$("#cx");if(cx)cx.onclick=()=>{adding=false;render()};
+ const sv=$("#sv");if(sv)sv.onclick=()=>{const g=i=>$("#f_"+i).value.trim(),c=g("c"),w=g("w"),am=+g("a");
+  if(!c||!w)return toast("Enter the contractor and the work.");if(!(am>0))return toast("Enter the FDR amount.");if(g("t")<=g("f"))return toast("Maturity date must be after the issue date.");
+  S.n++;const a={id:"FDR-2026-"+String(900+S.n),c,w,dp:g("d"),b:g("b"),amt:am,from:g("f"),to:g("t"),dl:g("l"),bk:"p",ocr:"pending",lien:"n",rq:false,rel:false};S.d.unshift(a);sel=a.id;adding=false;log(a,"FDR submitted by "+c);toast(a.id+" submitted. Next: bank verification and receipt scan.");render()};
+ const cv=$("#csv");if(cv)cv.onclick=()=>{const r=[["FDR","Contractor","Work","Bank","Amount","Issued","Matures","Status"],...S.d.map(a=>[a.id,a.c,a.w,a.b,a.amt,a.from,a.to,st(a)])].map(x=>x.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");const l=document.createElement("a");l.href=URL.createObjectURL(new Blob([r],{type:"text/csv"}));l.download="fdr-report.csv";l.click();toast("Report downloaded")}}
+$("#q").oninput=()=>{render();const i=$("#q");i.focus()};
+$("#role").onchange=e=>{role=e.target.value;if(role==="bank"){/* bank sees all */}render()};
+$("#rs").onclick=e=>{e.preventDefault();S=seed();sel=null;save();toast("Demo data reset");render()};
+addEventListener("hashchange",render);render();
+</script>
+</body>
+</html>
